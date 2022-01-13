@@ -1,9 +1,9 @@
 import chai from 'chai';
 const expect = chai.expect;
 import User from '../classes/User';
-import users from '../data/sample-customers-data'
+import users from '../data/sample-customers-data';
 
-describe.only('User class', () => {
+describe('User class', () => {
 
   let wyntonKelley;
   let anonymous;

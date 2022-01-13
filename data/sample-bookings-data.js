@@ -1,4 +1,4 @@
-module.exports = [
+const bookings = [
   {
     "id": "5fwrgu4i7k55hl6sz",
     "userID": 1,
@@ -35,3 +35,5 @@ module.exports = [
     "roomServiceCharges": []
   },
 ]
+
+export default bookings;
