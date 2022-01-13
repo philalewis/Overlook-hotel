@@ -3,7 +3,7 @@ const expect = chai.expect;
 import User from '../classes/User';
 import users from '../data/sample-customers-data'
 
-describe('User class', () => {
+describe.only('User class', () => {
 
   let wyntonKelley;
   let anonymous;
@@ -35,7 +35,7 @@ describe('User class', () => {
   });
 
   it('should have a username', () => {
-    expect(wyntonKelley.username).to.equal('customer01');
+    expect(wyntonKelley.username).to.equal('customer1');
   });
 
   it('should have a guest username', () => {
