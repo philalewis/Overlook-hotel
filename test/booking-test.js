@@ -8,7 +8,7 @@ describe.only('Booking class', () => {
   let booking;
 
   beforeEach(() => {
-    booking = new Booking(bookings[0])
+    booking = new Booking(bookings[0]);
   });
 
   it('should be a function', () => {
@@ -20,9 +20,9 @@ describe.only('Booking class', () => {
     expect(booking.id).to.equal('5fwrgu4i7k55hl6sz');
   });
 
-  // it('should be able to create an id if none is provided', () => {
-  //   expect(booking.createNewId().length).to.equal(17);
-  // });
+  it('should be able to create an id of a specified length', () => {
+    expect(booking.createNewId(17).length).to.equal(17);
+  });
 
   it('should have a userId', () => {
     expect(booking.userId).to.equal(1);
