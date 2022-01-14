@@ -22,6 +22,4 @@ describe('Manager class', () => {
     expect(billEvans.bookings).to.be.an('array');
     expect(billEvans.bookings.length).to.equal(5);
   });
-
-  
-})
+});

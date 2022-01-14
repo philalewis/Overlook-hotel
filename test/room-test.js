@@ -3,7 +3,7 @@ const expect = chai.expect;
 import Room from '../classes/Room';
 import rooms from '../data/sample-rooms-data';
 
-describe.only('Room class', () => {
+describe('Room class', () => {
 
   let room;
 
