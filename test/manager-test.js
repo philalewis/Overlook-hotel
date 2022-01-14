@@ -4,7 +4,7 @@ import Manager from '../classes/Manager';
 import users from '../data/sample-customers-data';
 import bookings from '../data/sample-bookings-data';
 
-describe.only('Manager class', () => {
+describe('Manager class', () => {
   let billEvans;
   let anonymous;
 

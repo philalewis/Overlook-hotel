@@ -9,7 +9,8 @@ class Customer extends User {
   }
 
   filterBookings(bookings) {
-    return bookings ? bookings.filter(booking => booking.userID === this.id) : [];
+    return bookings.map(booking => new Booking(booking));
+    // return bookings ? bookings.filter(booking => booking.userID === this.id) : [];
   }
 
   calculateTotalSpent() {

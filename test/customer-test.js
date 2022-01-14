@@ -33,7 +33,4 @@ describe('Customer class', () => {
     expect(anonymous.type).to.equal('customer');
   });
 
-  // it('should be able to book a room', () => {
-  //   wyntonKelley.bookARoom()
-  // })
 });
