@@ -3,7 +3,7 @@ const expect = chai.expect;
 import Room from '../classes/Room';
 import rooms from '../data/sample-rooms-data';
 
-describe('Room class', () => {
+describe.only('Room class', () => {
 
   let room;
 
@@ -21,7 +21,7 @@ describe('Room class', () => {
   });
 
   it('should have a room type', () => {
-    expect(room.roomType).to.equal("residential suite");
+    expect(room.type).to.equal("residential suite");
   });
 
   it('should have an option for a bidet', () => {
@@ -37,6 +37,6 @@ describe('Room class', () => {
   });
 
   it('should have a cost per night', () => {
-    expect(room.costPerNight).to.equal(358.4);
+    expect(room.cost).to.equal(358.4);
   });
 });
