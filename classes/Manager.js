@@ -1,4 +1,5 @@
 import User from './User';
+import Booking from './Booking'
 
 class Manager extends User {
   constructor(user, bookings) {
@@ -8,7 +9,7 @@ class Manager extends User {
   }
 
   getBookings(bookings) {
-    return bookings.map(booking => new Booking(booking));
+    return bookings ? bookings.map(booking => new Booking(booking)) : null;
   }
 }
 
