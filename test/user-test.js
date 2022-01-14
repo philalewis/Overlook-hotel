@@ -46,4 +46,6 @@ describe('User class', () => {
     expect(wyntonKelley.password).to.equal('overlook2021');
     expect(anonymous.password).to.equal('overlook2021');
   });
+
+
 });

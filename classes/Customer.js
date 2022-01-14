@@ -5,6 +5,7 @@ class Customer extends User {
     super(user);
     this.bookings = this.filterBookings(bookings);
     this.totalSpent = this.calculateTotalSpent();
+    this.type = 'customer';
   }
 
   filterBookings(bookings) {
