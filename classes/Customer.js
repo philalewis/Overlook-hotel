@@ -1,16 +1,20 @@
 import User from './User';
+import Booking from './Booking';
 
 class Customer extends User {
   constructor(user, bookings) {
     super(user);
-    this.bookings = this.filterBookings(bookings);
+    this.bookings = bookings ? this.populateBookings(bookings) : [];
     this.totalSpent = this.calculateTotalSpent();
     this.type = 'customer';
   }
 
-  filterBookings(bookings) {
-    return bookings.map(booking => new Booking(booking));
-    // return bookings ? bookings.filter(booking => booking.userID === this.id) : [];
+  populateBookings(bookings) {
+    const list = [];
+    bookings.forEach(booking => {
+      booking.userID === this.id ? list.push(new Booking(booking)) : null;
+    });
+    return list;
   }
 
   calculateTotalSpent() {

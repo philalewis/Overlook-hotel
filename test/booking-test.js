@@ -3,7 +3,7 @@ const expect = chai.expect;
 import Booking from '../classes/Booking';
 import bookings from '../data/sample-bookings-data';
 
-describe.only('Booking class', () => {
+describe('Booking class', () => {
 
   let booking;
 
