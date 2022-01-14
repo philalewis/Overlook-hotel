@@ -1,4 +1,4 @@
-module.exports = [
+const rooms = [
   {
     "number": 1,
     "roomType": "residential suite",
@@ -16,3 +16,5 @@ module.exports = [
     "costPerNight": 477.38
   }
 ]
+
+export default rooms;
