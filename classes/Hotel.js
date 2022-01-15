@@ -75,6 +75,10 @@ class Hotel {
 
     return Math.round(cost * 100) / 100;
   }
+
+  resetFilteredRooms() {
+    this.filteredRooms = this.rooms;
+  }
 }
 
 export default Hotel;
