@@ -89,6 +89,10 @@ describe('Hotel class', () => {
     expect(hotel.getCustomerBookings(1)[0].roomNumber).to.equal(1);
   });
 
+  it('should be able to calculate how much a given user has spent', () => {
+    expect(hotel.calculateCustomerExpenses(1)).to.equal(1194.18);
+  });
+
   it('should have at least one manager', () => {
     expect(hotel.managers).to.be.an('array');
     expect(hotel.managers.length).to.equal(1);

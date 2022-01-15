@@ -60,7 +60,21 @@ class Hotel {
     return this.bookings.filter(booking => booking.userId === id);
   }
 
-  
+  calculateCustomerExpenses(id) {
+    const roomNumbers = this.getCustomerBookings(id).map(booking => {
+      return booking.roomNumber;
+    });
+    
+    const cost = roomNumbers.reduce((acc, roomNum) => {
+      const currentRoom = this.rooms.find(room => {
+        return room.number === roomNum;
+      });
+      acc += currentRoom.cost
+      return acc;
+    }, 0);
+
+    return Math.round(cost * 100) / 100;
+  }
 }
 
 export default Hotel;
