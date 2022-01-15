@@ -13,7 +13,7 @@ describe('Hotel class', () => {
   let hotel;
 
   beforeEach(() => {
-    hotel = new Hotel(rooms, customers, bookings);
+    hotel = new Hotel(rooms, customers, bookings, 1);
   });
 
   it('should be a function', () => {
@@ -108,5 +108,9 @@ describe('Hotel class', () => {
     hotel.resetFilteredRooms();
 
     expect(hotel.filteredRooms.length).to.equal(2);
+  });
+
+  it('should have a current customer', () => {
+    expect(hotel.currentCustomer).to.be.an.instanceof(Customer);
   });
 });
