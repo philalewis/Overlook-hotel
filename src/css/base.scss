@@ -7,8 +7,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  @include display-flex-column;
-  @include center;
+  // @include display-flex-column;
 }
 
 header {
@@ -16,7 +15,7 @@ header {
   color: white;
   width: 100%;
   text-align: center;
-  height: 6vh;
+  height: 8vh;
   position: fixed;
   top: 0;
   @include display-flex-column;
@@ -51,23 +50,31 @@ h4 {
   @include display-flex-row;
   @include center;
   justify-content: space-around;
-  height: 10vh;
-  position: fixed;
-  top: 6vh;
-  padding: 10px;
   background: white;
+  position: fixed;
+  height: 8vh;
+  top: 8vh;
 }
 
-.booking {
+.bookings,
+.rooms {
+  @include display-flex-column;
+  margin-top: 16vh;
+  align-items: center;
+}
+
+.booking,
+.room {
   background: white;
   width: 80vw;
   border-radius: 10px;
   padding: 10px;
   @include display-flex-column;
-
+  margin: 20px;
 }
 
-.booking-info {
+.booking-info,
+.room-info {
   @include display-flex-row;
 }
 
@@ -82,8 +89,17 @@ h4 {
 }
 
 .right-side {
-  text-align: right;
+  @include display-flex-column;
   justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.select-room {
+  width: 50%;
+  border: none;
+  border-radius: 10px;
+  height: 4vh;
+  background: $primary-background;
 }
 
 .hidden {
