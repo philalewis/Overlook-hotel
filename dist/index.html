@@ -10,20 +10,28 @@
   <header>
     <h1>Overlook Hotel</h1>
   </header>
-  <section id="loginPage">
+  <section class="hidden" id="loginPage">
     <h2>Login</h2>
     <label>Username:</label>
     <input type="text" class="login-input" id="username">
     <label>Password:</label>
     <input type="text" class="login-input" id="password">
   </section>
+  <form class="hidden" id="bookingOptions">
+    <p id="totalSpent">Total Amount Spent: $10,000.00</p>
+    <label class="input-label">Select A Date: </label>
+    <input type="date" id="selectDate">
+    <label class="input-label">Room Type:</label>
+    <select name="room-type" class="hidden" id="roomType">
+      <option value="single room">Single Room</option>
+      <option value="suite">Suite</option>
+      <option value="junior suite">Junior Suite</option>
+      <option value="residential suite">Residential Suite</option>
+    </select>
+  </form>
   <section id="dashboard">
-    <section id="bookings">
-
-    </section>
-    <section id="totalSpent">
-      
-    </section>
+    <section id="bookings"></section>
+    <secction id="rooms-available"></secction>
   </section>
   <script src="bundle.js"></script>
 </body>
