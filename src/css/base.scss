@@ -1,6 +1,91 @@
-/* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
 
 body {
   background: $primary-background;
+  font-family: "Gill Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  @include display-flex-column;
+  @include center;
+}
+
+header {
+  background: black;
+  color: white;
+  width: 100%;
+  text-align: center;
+  height: 6vh;
+  position: fixed;
+  top: 0;
+  @include display-flex-column;
+  @include center;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0 0 20px 0;
+}
+
+h4, p {
+  margin: 5px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+.login-page {
+  @include display-flex-column;
+  @include center;
+  height: 30vh;
+  width: 30vw;
+}
+
+.booking-options {
+  width: 100%;
+  @include display-flex-row;
+  @include center;
+  justify-content: space-around;
+  height: 10vh;
+  position: fixed;
+  top: 6vh;
+  padding: 10px;
+  background: white;
+}
+
+.booking {
+  background: white;
+  width: 80vw;
+  border-radius: 10px;
+  padding: 10px;
+  @include display-flex-column;
+
+}
+
+.booking-info {
+  @include display-flex-row;
+}
+
+.left-side,
+.right-side {
+  @include display-flex-column;
+  width: 50%;
+}
+
+.left-side {
+  text-align: left;
+}
+
+.right-side {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.hidden {
+  display: none;
 }
