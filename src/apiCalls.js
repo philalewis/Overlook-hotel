@@ -8,6 +8,6 @@ const getCustomersData = retrieveData('customers');
 
 const getBookingsData = retrieveData('bookings');
 
+const getSingleCustomer = id => retrieveData(`customers/${id}`);
 
-
-export {getRoomsData, getCustomersData, getBookingsData};
+export {getRoomsData, getCustomersData, getBookingsData, getSingleCustomer};

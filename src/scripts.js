@@ -40,4 +40,4 @@ const getRandomIndex = array => Math.floor(Math.random() * array.length);
 
 
 //************* Event Listeners ****************
-// window.addEventListener('load', getData);
+window.addEventListener('load', getData);
