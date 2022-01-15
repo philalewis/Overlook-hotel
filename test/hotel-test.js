@@ -69,4 +69,9 @@ describe('Hotel class', () => {
   it('should be able to pull up a customer\'s profile', () => {
     expect(hotel.getCustomerInfo(1).id).to.equal(1);
   });
+
+  it('should have at least one manager', () => {
+    expect(hotel.managers).to.be.an('array');
+    expect(hotel.managers.length).to.equal(1);
+  })
 });
