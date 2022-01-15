@@ -10,11 +10,7 @@ class Customer extends User {
   }
 
   populateBookings(bookings) {
-    const list = [];
-    bookings.forEach(booking => {
-      booking.userID === this.id ? list.push(new Booking(booking)) : null;
-    });
-    return list;
+    return bookings.map(booking => new Booking(booking));
   }
 
   calculateTotalSpent() {
