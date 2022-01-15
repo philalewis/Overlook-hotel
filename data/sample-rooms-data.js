@@ -11,7 +11,7 @@ const rooms = [
     "number": 2,
     "roomType": "suite",
     "bidet": false,
-    "bedSize": "full",
+    "bedSize": "queen",
     "numBeds": 2,
     "costPerNight": 477.38
   }
