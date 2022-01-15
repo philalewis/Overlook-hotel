@@ -5,12 +5,13 @@ import Manager from '../classes/Manager';
 
 
 class Hotel {
-  constructor (rooms, customers, bookings) {
+  constructor (rooms, customers, bookings, id) {
     this.rooms = this.populateRooms(rooms);
     this.customers = this.populateCustomers(customers);
     this.bookings = this.populateBookings(bookings);
     this.managers = [new Manager()];
     this.filteredRooms = this.rooms;
+    this.currentCustomer = this.getCustomerInfo(id);
   }
 
   populateRooms(rooms) {
@@ -74,6 +75,10 @@ class Hotel {
     }, 0);
 
     return Math.round(cost * 100) / 100;
+  }
+
+  resetFilteredRooms() {
+    this.filteredRooms = this.rooms;
   }
 }
 

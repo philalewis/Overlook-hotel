@@ -13,7 +13,7 @@ describe('Hotel class', () => {
   let hotel;
 
   beforeEach(() => {
-    hotel = new Hotel(rooms, customers, bookings);
+    hotel = new Hotel(rooms, customers, bookings, 1);
   });
 
   it('should be a function', () => {
@@ -96,5 +96,21 @@ describe('Hotel class', () => {
   it('should have at least one manager', () => {
     expect(hotel.managers).to.be.an('array');
     expect(hotel.managers.length).to.equal(1);
-  })
+  });
+
+  it('should be able to reset the filtered list of rooms', () => {
+    expect(hotel.filteredRooms.length).to.equal(2);
+    
+    hotel.filterByDate("2022-04-22");
+
+    expect(hotel.filteredRooms.length).to.equal(1);
+
+    hotel.resetFilteredRooms();
+
+    expect(hotel.filteredRooms.length).to.equal(2);
+  });
+
+  it('should have a current customer', () => {
+    expect(hotel.currentCustomer).to.be.an.instanceof(Customer);
+  });
 });
