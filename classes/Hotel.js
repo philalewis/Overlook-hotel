@@ -24,9 +24,9 @@ class Hotel {
     return bookings ? bookings.map(booking => new Booking(booking)) : [];
   }
 
-  filterRooms(type, value) {
-    this.
-  }
+  // filterRooms(type, value) {
+  //   this.
+  // }
 }
 
 export default Hotel;

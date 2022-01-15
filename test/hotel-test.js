@@ -26,6 +26,11 @@ describe('Hotel class', () => {
     expect(hotel.rooms[0]).to.be.an.instanceof(Room);
   });
 
+  it('should have a filtered list', () => {
+    expect(hotel.filteredRooms).to.be.an('array');
+    expect(hotel.filteredRooms.length).to.equal(hotel.rooms.length);
+  });
+
   it('should be able to filter rooms by type', () => {
     expect(hotel.filterRooms(numBeds, 2).length).to.equal(1);
     expect(hotel.filterRooms(bedSize, 'queen').length).to.equal(2);
