@@ -3,15 +3,14 @@ import Customer from '../classes/Customer';
 import Booking from '../classes/Booking';
 import Manager from '../classes/Manager';
 
-
 class Hotel {
-  constructor (rooms, customers, bookings, id) {
+  constructor (rooms, customers, bookings) {
     this.rooms = this.populateRooms(rooms);
     this.customers = this.populateCustomers(customers);
     this.bookings = this.populateBookings(bookings);
     this.managers = [new Manager()];
     this.filteredRooms = this.rooms;
-    this.currentCustomer = this.getCustomerInfo(id);
+    this.currentCustomer = null;
   }
 
   populateRooms(rooms) {
@@ -54,7 +53,7 @@ class Hotel {
   }
 
   getCustomerInfo(id) {
-    return this.customers.find(customer => customer.id === id);
+    return this.currentCustomer = this.customers.find(customer => customer.id === id);
   }
 
   getCustomerBookings(id) {
