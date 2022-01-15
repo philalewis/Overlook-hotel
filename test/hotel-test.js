@@ -70,6 +70,7 @@ describe('Hotel class', () => {
       hotel.cancelBooking("5fwrgu4i7k55hl6t6");
   
       expect(hotel.bookings.length).to.equal(4);
+      expect(hotel.bookings[2].id).to.equal("5fwrgu4i7k55hl6t7");
     });
 
   it('should have a list of customers', () => {
@@ -79,6 +80,13 @@ describe('Hotel class', () => {
 
   it('should be able to pull up a customer\'s profile', () => {
     expect(hotel.getCustomerInfo(1).id).to.equal(1);
+    expect(hotel.getCustomerInfo(1)).to.be.an.instanceof(Customer);
+  });
+
+  it('should pull a given customer\'s bookings', () => {
+    expect(hotel.getCustomerBookings(1)).to.be.an('array');
+    expect(hotel.getCustomerBookings(1).length).to.equal(3);
+    expect(hotel.getCustomerBookings(1)[0].roomNumber).to.equal(1);
   });
 
   it('should have at least one manager', () => {

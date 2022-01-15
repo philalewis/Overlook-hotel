@@ -41,6 +41,26 @@ class Hotel {
       return !roomNumbers.includes(room.number)
     })
   }
+
+  bookRoom(info) {
+    this.bookings.push(new Booking(info));
+  }
+
+  cancelBooking(id) {
+    const booking = this.bookings.find(book => book.id === id);
+    const index = this.bookings.indexOf(booking);
+    this.bookings.splice(index, 1);
+  }
+
+  getCustomerInfo(id) {
+    return this.customers.find(customer => customer.id === id);
+  }
+
+  getCustomerBookings(id) {
+    return this.bookings.filter(booking => booking.userId === id);
+  }
+
+  
 }
 
 export default Hotel;
