@@ -26,8 +26,9 @@ const domUpdates = {
     show([bookingOptions, bookings]);
     hide([loginPage, rooms]);
   },
-
+  
   loadCustomerBookings(hotel) {
+    console.log(hotel)
     bookings.innerHTML = '';
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `

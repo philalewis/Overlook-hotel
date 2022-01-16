@@ -5,18 +5,20 @@ import domUpdates from './domUpdates';
 import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
+const currentUserId = 5;
 
 const getData = () => {
-  Promise.all([getRoomsData, getCustomersData, getBookingsData])
+  console.log('BEFORE THE PROMISE.ALL')
+  Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
   .then(data => {
+    console.log('IN THE .THEN BLOCK', data[2].bookings)
     hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
-    const id = getRandomIndex(hotel.customers);
-    hotel.getCustomerInfo(id);
+    hotel.getCustomerInfo(currentUserId);
     domUpdates.loadCustomerInfo(hotel);
   })
   .catch(err => {
-    // domUpdates.showErrMessage()
-    console.log('<<<<<<<This is what went wrong>>>>>>>>', err);
+    domUpdates.showError(err)
+    console.log('<<<<<<< This is what went wrong >>>>>>>>', err);
   })
 };
 
@@ -27,8 +29,6 @@ const selectDate = document.getElementById('selectDate');
 const roomType = document.getElementById('roomType');
 const yes = document.getElementById('yes');
 const no = document.getElementById('no');
-
-
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
@@ -57,7 +57,7 @@ function addEventListenersToSelectionButtons() {
 }
 
 function showConfirmationMessage(event) {
-  const id = event.target.id.slice(4)
+  const id = event.target.id.slice(4);
   hotel.updateRoomSelection(id);
   domUpdates.showConfirmationMessage();
 }
@@ -70,19 +70,11 @@ function submitBooking() {
   }
   postBooking(postObj)
   .then(data => {
-    getBookings();
+    console.log(data)
+    getData();
     domUpdates.exitModal();
   })
   .catch(err => {
     domUpdates.showError(err)
   });
-}
-
-function getBookings() {
-  getBookingsData
-  .then(info => {
-    hotel.populateBookings(info.bookings, hotel.rooms);
-    domUpdates.loadCustomerInfo(hotel);
-  })
-  .catch(err => domUpdates.showError(err));
 }

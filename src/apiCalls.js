@@ -4,19 +4,17 @@ const retrieveData = api =>
 
 const catchError = response => {
   if(response.ok) {
-    response.json();
+    return response.json();
   } else {
     throw new Error('Something went wrong. Please try again');
   }
 }
 
-const getRoomsData = retrieveData('rooms');
+const getRoomsData = () => retrieveData('rooms');
 
-const getCustomersData = retrieveData('customers');
+const getCustomersData = () => retrieveData('customers');
 
-const getBookingsData = retrieveData('bookings');
-
-// const getSingleCustomer = id => retrieveData(`customers/${id}`);
+const getBookingsData = () => retrieveData('bookings');
 
 const postBooking = (obj) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
