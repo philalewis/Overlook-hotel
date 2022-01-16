@@ -24,13 +24,19 @@ const getRandomIndex = array => Math.floor(Math.random() * array.length);
 
 //************* Query Selectors ****************
 const selectDate = document.getElementById('selectDate');
+const roomType = document.getElementById('roomType');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
 selectDate.addEventListener('input', loadRooms);
+roomType.addEventListener('input', filterRooms);
 
 function loadRooms() {
-  // domUpdates.loadRooms(hotel.filterByDate(selectDate.value));
   hotel.filterByDate(selectDate.value);
-  domUpdates.loadRooms(hotel.filteredRooms);
+  domUpdates.updateRooms(hotel.filteredRooms);
+}
+
+function filterRooms() {
+  hotel.filterRooms('type', roomType.value);
+  domUpdates.updateRooms(hotel.filteredRooms)
 }
