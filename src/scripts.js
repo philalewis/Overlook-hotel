@@ -2,7 +2,7 @@ import './css/base.scss';
 import './images/turing-logo.png'
 import Hotel from '../classes/Hotel';
 import domUpdates from './domUpdates';
-import {getRoomsData, getCustomersData, getBookingsData} from './apiCalls';
+import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
 
@@ -29,17 +29,19 @@ const yes = document.getElementById('yes');
 const no = document.getElementById('no');
 
 
+
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
 selectDate.addEventListener('input', loadRooms);
 roomType.addEventListener('input', filterRooms);
 no.addEventListener('click', domUpdates.exitModal);
-// yes.addEventListener('click', submitBooking);
+yes.addEventListener('click', submitBooking);
 
 function loadRooms() {
+  hotel.updateSelectedDate(selectDate.value);
   hotel.filterByDate(selectDate.value);
   domUpdates.updateRooms(hotel.filteredRooms);
-  addEventListenersToConfirmationButtons();
+  addEventListenersToSelectionButtons();
 }
 
 function filterRooms() {
@@ -47,13 +49,40 @@ function filterRooms() {
   domUpdates.updateRooms(hotel.filteredRooms);
 }
 
-function addEventListenersToConfirmationButtons() {
+function addEventListenersToSelectionButtons() {
   const selectRoomButtons = document.querySelectorAll('.select-room');
   selectRoomButtons.forEach(button => {
     button.addEventListener('click', showConfirmationMessage);
   });
 }
 
-function showConfirmationMessage() {
+function showConfirmationMessage(event) {
+  const id = event.target.id.slice(4)
+  hotel.updateRoomSelection(id);
   domUpdates.showConfirmationMessage();
+}
+
+function submitBooking() {
+  const postObj = {
+    userID: hotel.currentCustomer.id,
+    date: hotel.selectedDate,
+    roomNumber: parseInt(hotel.selectedRoom)
+  }
+  postBooking(postObj)
+  .then(data => {
+    getBookings();
+    domUpdates.exitModal();
+  })
+  .catch(err => {
+    domUpdates.showError(err)
+  });
+}
+
+function getBookings() {
+  getBookingsData
+  .then(info => {
+    hotel.populateBookings(info.bookings, hotel.rooms);
+    domUpdates.loadCustomerInfo(hotel);
+  })
+  .catch(err => domUpdates.showError(err));
 }

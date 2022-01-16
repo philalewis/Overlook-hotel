@@ -11,6 +11,8 @@ class Hotel {
     this.managers = [new Manager()];
     this.filteredRooms = this.rooms;
     this.currentCustomer = null;
+    this.selectedRoom = null;
+    this.selectedDate = null;
   }
 
   populateRooms(rooms) {
@@ -84,6 +86,14 @@ class Hotel {
 
   resetFilteredRooms() {
     this.filteredRooms = this.rooms;
+  }
+
+  updateRoomSelection(roomNum) {
+    this.selectedRoom = roomNum;
+  }
+
+  updateSelectedDate(date) {
+    this.selectedDate = date.split('-').join('/');
   }
 }
 

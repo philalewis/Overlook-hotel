@@ -6,6 +6,8 @@ const bookings = document.getElementById('bookings');
 const rooms = document.getElementById('rooms');
 const confirmBookingBox = document.getElementById('confirmBookingBox');
 const modal = document.getElementById('modal');
+const errorMessage = document.getElementById('errorMessage');
+const errorBox = document.getElementById('errorBox');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -22,7 +24,7 @@ const domUpdates = {
     totalSpent.innerText = `Total Amount Spent: $${hotel
       .calculateCustomerExpenses(hotel.currentCustomer.id)}`;
     show([bookingOptions, bookings]);
-    hide([loginPage]);
+    hide([loginPage, rooms]);
   },
 
   loadCustomerBookings(hotel) {
@@ -83,8 +85,17 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox]);
-  }
+    hide([modal, confirmBookingBox, errorBox]);
+  },
+
+  showError(error) {
+    console.log(error)
+    errorMessage.innerText = error.message;
+    show([modal, errorBox]);
+    hide([confirmBookingBox]);
+  },
+
+
 }
 
 export default domUpdates;
