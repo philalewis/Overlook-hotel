@@ -4,6 +4,8 @@ const bookingOptions = document.getElementById('bookingOptions');
 const selectRoomType = document.getElementById('selectRoomType');
 const bookings = document.getElementById('bookings');
 const rooms = document.getElementById('rooms');
+const confirmBookingBox = document.getElementById('confirmBookingBox');
+const modal = document.getElementById('modal');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -74,6 +76,11 @@ const domUpdates = {
         </section>
       </section>`
     });
+  },
+
+  showConfirmationMessage() {
+    show([modal, confirmBookingBox]);
+    hide([rooms])
   },
 }
 
