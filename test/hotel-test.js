@@ -111,6 +111,7 @@ describe('Hotel class', () => {
   });
 
   it('should have a current customer', () => {
+    hotel.getCustomerInfo(1)
     expect(hotel.currentCustomer).to.be.an.instanceof(Customer);
   });
 });

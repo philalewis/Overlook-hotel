@@ -10,28 +10,51 @@
   <header>
     <h1>Overlook Hotel</h1>
   </header>
-  <section class="hidden" id="loginPage">
+  <nav class="booking-options hidden" id="bookingOptions">
+    <p id="totalSpent"></p>
+    <section class="date-select">
+      <label class="input-label">Select A Date:</label>
+      <input type="date" id="selectDate">
+    </section>
+    <section class="room-type-select hidden">
+      <label class="input-label">Room Type:</label>
+      <select name="room-type-input" class="" id="roomType">
+        <option value="single room">Single Room</option>
+        <option value="suite">Suite</option>
+        <option value="junior suite">Junior Suite</option>
+        <option value="residential suite">Residential Suite</option>
+      </select>
+    </section>
+  </nav>
+  <section class="login-page hidden" id="loginPage">
     <h2>Login</h2>
     <label>Username:</label>
     <input type="text" class="login-input" id="username">
     <label>Password:</label>
     <input type="text" class="login-input" id="password">
   </section>
-  <form class="hidden" id="bookingOptions">
-    <p id="totalSpent">Total Amount Spent: $10,000.00</p>
-    <label class="input-label">Select A Date: </label>
-    <input type="date" id="selectDate">
-    <label class="input-label">Room Type:</label>
-    <select name="room-type" class="hidden" id="roomType">
-      <option value="single room">Single Room</option>
-      <option value="suite">Suite</option>
-      <option value="junior suite">Junior Suite</option>
-      <option value="residential suite">Residential Suite</option>
-    </select>
-  </form>
   <section id="dashboard">
-    <section id="bookings"></section>
-    <secction id="rooms-available"></secction>
+    <!-- bookings -->
+    <section class="bookings hidden" id="bookings">
+    </section>
+    <!-- rooms -->
+    <section class="rooms hidden" id="rooms">
+      <!-- <section class="room">
+        <section class="room-info">
+          <section class="left-side">
+            <p class="room-number">Room Number: 23</p>
+            <p class="room-type">Type: Single Room</p>
+            <p class="bed-size">Bed: Queen</p>
+            <p class="num-beds">Number of Beds: 2</p>
+            <p class="bidet">Bidet: Yes</p>
+          </section>
+          <section class="right-side">
+            <h4 class="cost"><b>$372.13</b></h4>
+            <button class="select-room" id="">SELECT</button>
+          </section>
+        </section>
+      </section> -->
+    </section>
   </section>
   <script src="bundle.js"></script>
 </body>

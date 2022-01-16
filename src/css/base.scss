@@ -59,7 +59,7 @@ h4 {
 .bookings,
 .rooms {
   @include display-flex-column;
-  margin-top: 16vh;
+  margin-top: calc(16vh + 20px);
   align-items: center;
 }
 

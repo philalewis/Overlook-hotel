@@ -1,11 +1,36 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import Hotel from '../classes/Hotel';
+import domUpdates from './domUpdates';
+import {getRoomsData, getCustomersData, getBookingsData} from './apiCalls';
 
+let hotel;
 
-console.log('This is the JavaScript entry file - your code begins here.');
+const getData = () => {
+  Promise.all([getRoomsData, getCustomersData, getBookingsData])
+  .then(data => {
+    hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
+    const id = getRandomIndex(hotel.customers);
+    hotel.getCustomerInfo(id);
+    domUpdates.loadCustomerInfo(hotel);
+  })
+  .catch(err => {
+    // domUpdates.showErrMessage()
+    console.log('<<<<<<<This is what went wrong>>>>>>>>', err);
+  })
+};
+
+const getRandomIndex = array => Math.floor(Math.random() * array.length);
+
+//************* Query Selectors ****************
+const selectDate = document.getElementById('selectDate');
+
+//************* Event Listeners ****************
+window.addEventListener('load', getData);
+selectDate.addEventListener('input', loadRooms);
+
+function loadRooms() {
+  // domUpdates.loadRooms(hotel.filterByDate(selectDate.value));
+  hotel.filterByDate(selectDate.value);
+  domUpdates.loadRooms(hotel.filteredRooms);
+}
