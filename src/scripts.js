@@ -25,22 +25,26 @@ const getRandomIndex = array => Math.floor(Math.random() * array.length);
 //************* Query Selectors ****************
 const selectDate = document.getElementById('selectDate');
 const roomType = document.getElementById('roomType');
+const yes = document.getElementById('yes');
+const no = document.getElementById('no');
 
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
 selectDate.addEventListener('input', loadRooms);
 roomType.addEventListener('input', filterRooms);
+no.addEventListener('click', domUpdates.exitModal);
+// yes.addEventListener('click', submitBooking);
 
 function loadRooms() {
   hotel.filterByDate(selectDate.value);
   domUpdates.updateRooms(hotel.filteredRooms);
+  addEventListenersToConfirmationButtons();
 }
 
 function filterRooms() {
   hotel.filterRooms('type', roomType.value);
   domUpdates.updateRooms(hotel.filteredRooms);
-  addEventListenersToConfirmationButtons();
 }
 
 function addEventListenersToConfirmationButtons() {

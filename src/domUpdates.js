@@ -80,8 +80,11 @@ const domUpdates = {
 
   showConfirmationMessage() {
     show([modal, confirmBookingBox]);
-    hide([rooms])
   },
+
+  exitModal() {
+    hide([modal, confirmBookingBox]);
+  }
 }
 
 export default domUpdates;
