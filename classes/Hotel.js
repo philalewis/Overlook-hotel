@@ -6,23 +6,29 @@ import Manager from '../classes/Manager';
 class Hotel {
   constructor (rooms, customers, bookings) {
     this.rooms = this.populateRooms(rooms);
+    this.bookings = this.populateBookings(bookings, this.rooms);
     this.customers = this.populateCustomers(customers);
-    this.bookings = this.populateBookings(bookings);
     this.managers = [new Manager()];
     this.filteredRooms = this.rooms;
     this.currentCustomer = null;
   }
 
   populateRooms(rooms) {
-    return rooms ? rooms.map(room => new Room(room)) : [];
+    return rooms ? rooms.map(room => {
+      return new Room(room)
+    }) : [];
   }
 
   populateCustomers(customers) {
-    return customers ? customers.map(customer => new Customer(customer)) : [];
+    return customers ? customers.map(customer => {
+      return new Customer(customer, this.bookings)
+    }) : [];
   }
 
-  populateBookings(bookings) {
-    return bookings ? bookings.map(booking => new Booking(booking)) : [];
+  populateBookings(bookings, rooms) {
+    return bookings ? bookings.map(booking => {
+      return new Booking(booking, rooms)
+    }) : [];
   }
 
   filterRooms(type, value) {
@@ -43,7 +49,7 @@ class Hotel {
   }
 
   bookRoom(info) {
-    this.bookings.push(new Booking(info));
+    this.bookings.push(new Booking(info, this.rooms));
   }
 
   cancelBooking(id) {

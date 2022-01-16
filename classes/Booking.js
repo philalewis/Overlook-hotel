@@ -1,10 +1,11 @@
 class Booking {
-  constructor (booking) {
+  constructor (booking, rooms) {
     this.id = booking.id || this.createNewId(17);
     this.userId = booking.userID || 0;
     this.date = booking.date;
     this.roomNumber = booking.roomNumber;
     this.roomServiceCharges = booking.roomServiceCharges || [];
+    this.currentRoom = this.getCurrentRoom(rooms);
   }
 
   addServiceCharge(charge) {
@@ -19,6 +20,10 @@ class Booking {
       result.push(chars.charAt(Math.floor(Math.random() * numChars)))
     }
     return result.join('');
+  }
+
+  getCurrentRoom(rooms) {
+    return rooms.find(room => room.number === this.roomNumber);
   }
 }
 
