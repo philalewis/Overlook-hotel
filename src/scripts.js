@@ -12,7 +12,6 @@ const getData = () => {
     hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
     const id = getRandomIndex(hotel.customers);
     hotel.getCustomerInfo(id);
-    console.log(hotel.currentCustomer)
     domUpdates.loadCustomerInfo(hotel);
   })
   .catch(err => {
@@ -23,6 +22,15 @@ const getData = () => {
 
 const getRandomIndex = array => Math.floor(Math.random() * array.length);
 
+//************* Query Selectors ****************
+const selectDate = document.getElementById('selectDate');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
+selectDate.addEventListener('input', loadRooms);
+
+function loadRooms() {
+  // domUpdates.loadRooms(hotel.filterByDate(selectDate.value));
+  hotel.filterByDate(selectDate.value);
+  domUpdates.loadRooms(hotel.filteredRooms);
+}

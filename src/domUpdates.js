@@ -10,7 +10,6 @@ const hide = elements => elements.forEach(element => element.classList.add('hidd
 
 const domUpdates = {
   loadCustomerInfo(hotel) {
-    // console.log(Object.keys(hotel.currentCustomer.bookings))
     this.loadCustomerBookings(hotel);
     totalSpent.innerText = `Total Amount Spent: $${hotel
       .calculateCustomerExpenses(hotel.currentCustomer.id)}`;
@@ -19,7 +18,6 @@ const domUpdates = {
   },
 
   loadCustomerBookings(hotel) {
-    console.log(hotel)
     bookings.innerHTML = '';
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
@@ -35,13 +33,38 @@ const domUpdates = {
           </section>
           <section class="right-side">
             <h4 class="cost"><b>$${booking
-              .currentRoom.price.toFixed(2)}</b></h4>
+              .currentRoom.cost.toFixed(2)}</b></h4>
             <p class="confirmation-num">Confirmation Number: ${booking
               .id}</p>
           </section>
         </section>
       </section>`
     })
+  },
+
+  loadRooms(roomData) {
+    // console.log(rooms)
+    rooms.innerHTML = '';
+    roomData.forEach(room => {
+      rooms.innerHTML += `
+      <section class="room">
+        <section class="room-info">
+          <section class="left-side">
+            <p class="room-number">Room Number: ${room.number}</p>
+            <p class="room-type">Type: ${room.type}</p>
+            <p class="bed-size">Bed: ${room.bedSize}</p>
+            <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+            <p class="bidet">Bidet: ${true ? 'Yes' : 'No'}</p>
+          </section>
+          <section class="right-side">
+            <h4 class="cost"><b>$${room.cost}</b></h4>
+            <button class="select-room" id="room${room.number}">SELECT</button>
+          </section>
+        </section>
+      </section>`
+    })
+    show([rooms]);
+    hide([bookings])
   }
 }
 
