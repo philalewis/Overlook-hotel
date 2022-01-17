@@ -8,6 +8,8 @@ const confirmBookingBox = document.getElementById('confirmBookingBox');
 const modal = document.getElementById('modal');
 const errorMessage = document.getElementById('errorMessage');
 const errorBox = document.getElementById('errorBox');
+const noRooms = document.getElementById('noRooms');
+const selectDate = document.getElementById('selectDate');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -23,12 +25,12 @@ const domUpdates = {
     this.loadCustomerBookings(hotel);
     totalSpent.innerText = `Total Amount Spent: $${hotel
       .calculateCustomerExpenses(hotel.currentCustomer.id)}`;
+    selectDate.value = '';
     show([bookingOptions, bookings]);
     hide([loginPage, rooms]);
   },
   
   loadCustomerBookings(hotel) {
-    console.log(hotel)
     bookings.innerHTML = '';
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
@@ -54,7 +56,9 @@ const domUpdates = {
   },
 
   updateRooms(roomData) {
-    this.loadRooms(roomData);
+    roomData.length === 0 ?
+      this.showNoRoomMessage() :
+      this.loadRooms(roomData);
     show([rooms, selectRoomType]);
     hide([bookings]);
   },
@@ -86,7 +90,7 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox, errorBox]);
+    hide([modal, confirmBookingBox, errorBox, noRooms]);
   },
 
   showError(error) {
@@ -96,7 +100,14 @@ const domUpdates = {
     hide([confirmBookingBox]);
   },
 
+  showNoRoomMessage() {
+    show([modal, noRooms]);
+  },
 
+  exitNoRooms() {
+    hide([modal, noRooms]);
+    this.loadCustomerInfo();
+  }
 }
 
 export default domUpdates;

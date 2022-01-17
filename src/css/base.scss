@@ -116,7 +116,8 @@ h4 {
 }
 
 .error-box,
-.confirm-booking-box {
+.confirm-booking-box,
+.no-rooms {
   @include display-flex-row();
   justify-content: center;
   background-color: white;

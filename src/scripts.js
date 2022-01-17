@@ -8,10 +8,8 @@ let hotel;
 const currentUserId = 5;
 
 const getData = () => {
-  console.log('BEFORE THE PROMISE.ALL')
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
   .then(data => {
-    console.log('IN THE .THEN BLOCK', data[2].bookings)
     hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
     hotel.getCustomerInfo(currentUserId);
     domUpdates.loadCustomerInfo(hotel);
@@ -22,20 +20,24 @@ const getData = () => {
   })
 };
 
-const getRandomIndex = array => Math.floor(Math.random() * array.length);
+// const getRandomIndex = array => Math.floor(Math.random() * array.length);
 
 //************* Query Selectors ****************
 const selectDate = document.getElementById('selectDate');
 const roomType = document.getElementById('roomType');
 const yes = document.getElementById('yes');
 const no = document.getElementById('no');
+const exitErrorMessage = document.getElementById('exitErrorMessage');
+const exitNoRoomsButton = document.getElementById('exitNoRoomsButton');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
-selectDate.addEventListener('input', loadRooms);
+selectDate.addEventListener('change', loadRooms);
 roomType.addEventListener('input', filterRooms);
 no.addEventListener('click', domUpdates.exitModal);
 yes.addEventListener('click', submitBooking);
+exitErrorMessage.addEventListener('click', domUpdates.exitModal);
+exitNoRoomsButton.addEventListener('click', domUpdates.exitNoRooms);
 
 function loadRooms() {
   hotel.updateSelectedDate(selectDate.value);
@@ -47,6 +49,7 @@ function loadRooms() {
 function filterRooms() {
   hotel.filterRooms('type', roomType.value);
   domUpdates.updateRooms(hotel.filteredRooms);
+  addEventListenersToSelectionButtons();
 }
 
 function addEventListenersToSelectionButtons() {
@@ -70,7 +73,6 @@ function submitBooking() {
   }
   postBooking(postObj)
   .then(data => {
-    console.log(data)
     getData();
     domUpdates.exitModal();
   })
