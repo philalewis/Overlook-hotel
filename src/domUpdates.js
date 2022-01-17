@@ -77,7 +77,7 @@ const domUpdates = {
             <p class="bidet">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
           </section>
           <section class="right-side">
-            <h4 class="cost"><b>$${room.cost}</b></h4>
+            <h3 class="cost"><b>$${room.cost}</b></h3>
             <button class="select-room" id="room${room.number}">SELECT</button>
           </section>
         </section>
