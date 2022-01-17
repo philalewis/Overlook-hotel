@@ -37,7 +37,9 @@ roomType.addEventListener('input', filterRooms);
 no.addEventListener('click', domUpdates.exitModal);
 yes.addEventListener('click', submitBooking);
 exitErrorMessage.addEventListener('click', domUpdates.exitModal);
-exitNoRoomsButton.addEventListener('click', domUpdates.exitNoRooms);
+exitNoRoomsButton.addEventListener('click', () => {
+  return domUpdates.exitNoRooms(hotel)
+});
 
 function loadRooms() {
   hotel.updateSelectedDate(selectDate.value);

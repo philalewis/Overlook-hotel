@@ -104,9 +104,9 @@ const domUpdates = {
     show([modal, noRooms]);
   },
 
-  exitNoRooms() {
+  exitNoRooms(hotel) {
     hide([modal, noRooms]);
-    this.loadCustomerInfo();
+    this.loadCustomerInfo(hotel);
   }
 }
 
