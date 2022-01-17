@@ -11,6 +11,8 @@ class Hotel {
     this.managers = [new Manager()];
     this.filteredRooms = this.rooms;
     this.currentCustomer = null;
+    this.selectedRoom = null;
+    this.selectedDate = null;
   }
 
   populateRooms(rooms) {
@@ -26,9 +28,10 @@ class Hotel {
   }
 
   populateBookings(bookings, rooms) {
-    return bookings ? bookings.map(booking => {
+    this.bookings = [];
+    return bookings ? this.bookings = bookings.map(booking => {
       return new Booking(booking, rooms)
-    }) : [];
+    }) : this.bookings = [];
   }
 
   filterRooms(type, value) {
@@ -59,7 +62,7 @@ class Hotel {
   }
 
   getCustomerInfo(id) {
-    return this.currentCustomer = this.customers.find(customer => customer.id === id);
+    this.currentCustomer = this.customers.find(customer => customer.id === id);
   }
 
   getCustomerBookings(id) {
@@ -75,7 +78,7 @@ class Hotel {
       const currentRoom = this.rooms.find(room => {
         return room.number === roomNum;
       });
-      acc += currentRoom.cost
+      acc += parseFloat(currentRoom.cost)
       return acc;
     }, 0);
 
@@ -84,6 +87,14 @@ class Hotel {
 
   resetFilteredRooms() {
     this.filteredRooms = this.rooms;
+  }
+
+  updateRoomSelection(roomNum) {
+    this.selectedRoom = roomNum;
+  }
+
+  updateSelectedDate(date) {
+    this.selectedDate = date.split('-').join('/');
   }
 }
 

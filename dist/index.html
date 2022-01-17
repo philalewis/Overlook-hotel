@@ -39,6 +39,23 @@
     <section class="rooms hidden" id="rooms">
     </section>
   </section>
+  <section class="modal hidden" id="modal">
+    <section class="no-rooms hidden" id="noRooms">
+      <p>We're sorry, there are no rooms available for the date you selected. We deeply apologize for the inconvenince.</p>
+      <button id="exitNoRoomsButton">OKAY</button>
+    </section>
+    <section class="error-box hidden" id="errorBox">
+      <p id="errorMessage"></p>
+      <button id="exitErrorMessage">OKAY</button>
+    </section>
+    <section class="confirm-booking-box hidden" id="confirmBookingBox">
+      <p id="confirmationText">Are you sure?</p>
+      <section class="buttons">
+        <button id="yes">YES</button>
+        <button id="no">NO</button>
+      </section>
+    </section>
+  </section>
   <script src="bundle.js"></script>
 </body>
 </html>

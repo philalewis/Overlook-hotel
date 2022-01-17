@@ -4,6 +4,12 @@ const bookingOptions = document.getElementById('bookingOptions');
 const selectRoomType = document.getElementById('selectRoomType');
 const bookings = document.getElementById('bookings');
 const rooms = document.getElementById('rooms');
+const confirmBookingBox = document.getElementById('confirmBookingBox');
+const modal = document.getElementById('modal');
+const errorMessage = document.getElementById('errorMessage');
+const errorBox = document.getElementById('errorBox');
+const noRooms = document.getElementById('noRooms');
+const selectDate = document.getElementById('selectDate');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -19,10 +25,11 @@ const domUpdates = {
     this.loadCustomerBookings(hotel);
     totalSpent.innerText = `Total Amount Spent: $${hotel
       .calculateCustomerExpenses(hotel.currentCustomer.id)}`;
+    selectDate.value = '';
     show([bookingOptions, bookings]);
-    hide([loginPage]);
+    hide([loginPage, rooms]);
   },
-
+  
   loadCustomerBookings(hotel) {
     bookings.innerHTML = '';
     hotel.currentCustomer.bookings.forEach(booking => {
@@ -49,7 +56,9 @@ const domUpdates = {
   },
 
   updateRooms(roomData) {
-    this.loadRooms(roomData);
+    roomData.length === 0 ?
+      this.showNoRoomMessage() :
+      this.loadRooms(roomData);
     show([rooms, selectRoomType]);
     hide([bookings]);
   },
@@ -75,6 +84,30 @@ const domUpdates = {
       </section>`
     });
   },
+
+  showConfirmationMessage() {
+    show([modal, confirmBookingBox]);
+  },
+
+  exitModal() {
+    hide([modal, confirmBookingBox, errorBox, noRooms]);
+  },
+
+  showError(error) {
+    console.log(error)
+    errorMessage.innerText = error.message;
+    show([modal, errorBox]);
+    hide([confirmBookingBox]);
+  },
+
+  showNoRoomMessage() {
+    show([modal, noRooms]);
+  },
+
+  exitNoRooms(hotel) {
+    hide([modal, noRooms]);
+    this.loadCustomerInfo(hotel);
+  }
 }
 
 export default domUpdates;

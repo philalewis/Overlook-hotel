@@ -2,12 +2,29 @@ const retrieveData = api =>
   fetch(`http://localhost:3001/api/v1/${api}`)
     .then(response => response.json())
 
-const getRoomsData = retrieveData('rooms');
+const catchError = response => {
+  if(response.ok) {
+    return response.json();
+  } else {
+    throw new Error('Something went wrong. Please try again');
+  }
+}
 
-const getCustomersData = retrieveData('customers');
+const getRoomsData = () => retrieveData('rooms');
 
-const getBookingsData = retrieveData('bookings');
+const getCustomersData = () => retrieveData('customers');
 
-const getSingleCustomer = id => retrieveData(`customers/${id}`);
+const getBookingsData = () => retrieveData('bookings');
 
-export {getRoomsData, getCustomersData, getBookingsData, getSingleCustomer};
+const postBooking = (obj) => {
+  return fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    body: JSON.stringify(obj),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => catchError(response));
+}
+
+export {getRoomsData, getCustomersData, getBookingsData, postBooking};

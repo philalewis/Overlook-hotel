@@ -5,7 +5,6 @@ class Customer extends User {
   constructor(user, bookings) {
     super(user);
     this.bookings = bookings ? this.populateBookings(bookings) : [];
-    this.totalSpent = this.calculateTotalSpent();
     this.type = 'customer';
   }
 
@@ -13,11 +12,9 @@ class Customer extends User {
     return bookings.filter(booking => booking.userId === this.id);
   }
 
-  calculateTotalSpent() {
-    return this.bookings.reduce((acc, booking) => {
-      acc += booking
-      return acc;
-    }, 0)
+  updateBookings(bookingsData, roomsData) {
+    const updatedBookings = bookingsData.filter(booking => booking.userId === this.id);
+    this.bookings = updatedBookings.map(booking => new Booking(booking, roomsData));
   }
 }
 
