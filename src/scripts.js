@@ -5,7 +5,7 @@ import domUpdates from './domUpdates';
 import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
-// const currentUserId = 5;
+let currentUserId = 5;
 
 const getData = () => {
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
@@ -43,16 +43,14 @@ exitNoRoomsButton.addEventListener('click', () => {
   return domUpdates.exitNoRooms(hotel)
 });
 loginBtn.addEventListener('click', submitLoginInfo);
-loginBtn.addEventListener('keyup', (event) => {
-  return event.code === 'Enter' ? submitLoginInfo() : null;
-});
 exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
 
+//************* LOGIN ******************/
 function submitLoginInfo() {
   let id = '';
   if(validateUsername()) {
     id = getCustomerId();
-    console.log(id)
+    console.log(currentUserId)
     if(validatePassword(id)) {
       hotel.getCustomerInfo(id);
       domUpdates.loadCustomerInfo(hotel);
@@ -66,17 +64,13 @@ function submitLoginInfo() {
 
 function validateUsername() {
   const name = username.value;
-  if(9 < name.length < 11 &&
+  return 9 <= name.length <= 10 &&
     name.slice(0, 8) === 'customer' &&
-    typeof parseInt(name.slice(8)) === 'number') {
-      return true;
-    } else {
-      return false;
-    }
+    typeof parseInt(name.slice(8)) === 'number';
 }
 
 function getCustomerId() {
-  console.log(username.value.slice(8))
+  currentUserId = parseInt(username.value.slice(8));
   return parseInt(username.value.slice(8));
 }
 
@@ -91,6 +85,7 @@ function showLoginError() {
   domUpdates.showLoginError();
 }
 
+//************** ROOMS AND BOOKINGS ****************/
 function loadRooms() {
   hotel.updateSelectedDate(selectDate.value);
   hotel.filterByDate(selectDate.value);
@@ -99,6 +94,7 @@ function loadRooms() {
 }
 
 function filterRooms() {
+  loadRooms()
   hotel.filterRooms('type', roomType.value);
   domUpdates.updateRooms(hotel.filteredRooms);
   addEventListenersToSelectionButtons();
@@ -113,19 +109,22 @@ function addEventListenersToSelectionButtons() {
 
 function showConfirmationMessage(event) {
   const id = event.target.id.slice(4);
-  hotel.updateRoomSelection(id);
+  parseInt(hotel.updateRoomSelection(id));
   domUpdates.showConfirmationMessage();
 }
 
 function submitBooking() {
   const postObj = {
-    userID: hotel.currentCustomer.id,
+    userID: currentUserId,
     date: hotel.selectedDate,
     roomNumber: parseInt(hotel.selectedRoom)
   }
   postBooking(postObj)
   .then(data => {
     getData();
+    hotel.getCustomerInfo(currentUserId);
+    domUpdates.loadCustomerInfo(hotel);
+    addEventListenersToSelectionButtons();
     domUpdates.exitModal();
     domUpdates.hideRoomTypeOption();
   })

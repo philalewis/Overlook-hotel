@@ -67,7 +67,8 @@ h3 {
 .bookings,
 .rooms {
   @include display-flex-column;
-  margin-top: calc(60vh);
+  justify-content: flex-start;
+  margin-top: 440vh;
   align-items: center;
 }
 
@@ -127,7 +128,8 @@ h3 {
 .confirm-booking-box,
 .no-rooms,
 .login-error {
-  @include display-flex-row();
+  @include display-flex-column();
+  @include center;
   justify-content: center;
   background-color: white;
   margin: auto;
@@ -140,6 +142,9 @@ h3 {
 
 button {
   @include buttonStyles();
+  width: 5vw;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 button:hover {

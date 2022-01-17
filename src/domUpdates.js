@@ -30,8 +30,15 @@ const domUpdates = {
     show([bookingOptions, bookings]);
     hide([loginPage, rooms]);
   },
+
+  sortBookingsByDate(hotel) {
+    hotel.currentCustomer.bookings.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date)
+    })
+  },
   
   loadCustomerBookings(hotel) {
+    this.sortBookingsByDate(hotel);
     bookings.innerHTML = '';
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
@@ -57,11 +64,14 @@ const domUpdates = {
   },
 
   updateRooms(roomData) {
-    roomData.length === 0 ?
-      this.showNoRoomMessage() :
+    if(roomData.length === 0) {
+      this.showNoRoomMessage()
+    } else {
       this.loadRooms(roomData);
-    show([rooms, selectRoomType]);
-    hide([bookings]);
+      show([rooms, selectRoomType]);
+      hide([bookings]);
+      selectRoomType.selectedIndex = 0;
+    }
   },
 
   loadRooms(roomData) {
@@ -111,7 +121,6 @@ const domUpdates = {
 
   exitNoRooms(hotel) {
     hide([modal, noRooms]);
-    this.loadCustomerInfo(hotel);
   },
 
   showLoginError() {
