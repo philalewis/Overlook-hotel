@@ -125,7 +125,8 @@ h3 {
 
 .error-box,
 .confirm-booking-box,
-.no-rooms {
+.no-rooms,
+.login-error {
   @include display-flex-row();
   justify-content: center;
   background-color: white;

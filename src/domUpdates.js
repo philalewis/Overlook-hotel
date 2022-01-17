@@ -10,6 +10,7 @@ const errorMessage = document.getElementById('errorMessage');
 const errorBox = document.getElementById('errorBox');
 const noRooms = document.getElementById('noRooms');
 const selectDate = document.getElementById('selectDate');
+const loginError = document.getElementById('loginError');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -21,10 +22,6 @@ const capitalize = string => {
 }
 
 const domUpdates = {
-  // showLoginPage() {
-
-  // },
-
   loadCustomerInfo(hotel) {
     this.loadCustomerBookings(hotel);
     totalSpent.innerText = `Total Amount Spent: $${hotel
@@ -94,7 +91,11 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox, errorBox, noRooms]);
+    hide([modal, confirmBookingBox, errorBox, noRooms, loginError]);
+  },
+
+  hideRoomTypeOption() {
+    hide([selectRoomType]);
   },
 
   showError(error) {
@@ -111,6 +112,10 @@ const domUpdates = {
   exitNoRooms(hotel) {
     hide([modal, noRooms]);
     this.loadCustomerInfo(hotel);
+  },
+
+  showLoginError() {
+    show([modal, loginError]);
   }
 }
 

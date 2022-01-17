@@ -5,13 +5,13 @@ import domUpdates from './domUpdates';
 import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
-const currentUserId = 5;
+// const currentUserId = 5;
 
 const getData = () => {
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
   .then(data => {
     hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
-    hotel.getCustomerInfo(currentUserId);
+    // hotel.getCustomerInfo(currentUserId);
     // domUpdates.loadCustomerInfo(hotel);
   })
   .catch(err => {
@@ -20,10 +20,6 @@ const getData = () => {
   })
 };
 
-// const 
-
-// const getRandomIndex = array => Math.floor(Math.random() * array.length);
-
 //************* Query Selectors ****************
 const selectDate = document.getElementById('selectDate');
 const roomType = document.getElementById('roomType');
@@ -31,6 +27,10 @@ const yes = document.getElementById('yes');
 const no = document.getElementById('no');
 const exitErrorMessage = document.getElementById('exitErrorMessage');
 const exitNoRoomsButton = document.getElementById('exitNoRoomsButton');
+const loginBtn = document.getElementById('loginBtn');
+const username = document.getElementById('username');
+const password = document.getElementById('password');
+const exitLoginErrorButton = document.getElementById('exitLoginErrorButton');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
@@ -42,6 +42,54 @@ exitErrorMessage.addEventListener('click', domUpdates.exitModal);
 exitNoRoomsButton.addEventListener('click', () => {
   return domUpdates.exitNoRooms(hotel)
 });
+loginBtn.addEventListener('click', submitLoginInfo);
+loginBtn.addEventListener('keyup', (event) => {
+  return event.code === 'Enter' ? submitLoginInfo() : null;
+});
+exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
+
+function submitLoginInfo() {
+  let id = '';
+  if(validateUsername()) {
+    id = getCustomerId();
+    console.log(id)
+    if(validatePassword(id)) {
+      hotel.getCustomerInfo(id);
+      domUpdates.loadCustomerInfo(hotel);
+    } else {
+      showLoginError();
+    }
+  } else {
+    showLoginError();
+  }
+}
+
+function validateUsername() {
+  const name = username.value;
+  if(9 < name.length < 11 &&
+    name.slice(0, 8) === 'customer' &&
+    typeof parseInt(name.slice(8)) === 'number') {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+function getCustomerId() {
+  console.log(username.value.slice(8))
+  return parseInt(username.value.slice(8));
+}
+
+function validatePassword(id) {
+  const user = hotel.customers.find(customer => customer.id === id);
+  return password.value === user.password;
+}
+
+function showLoginError() {
+  username.value = '';
+  password.value = '';
+  domUpdates.showLoginError();
+}
 
 function loadRooms() {
   hotel.updateSelectedDate(selectDate.value);
@@ -79,6 +127,7 @@ function submitBooking() {
   .then(data => {
     getData();
     domUpdates.exitModal();
+    domUpdates.hideRoomTypeOption();
   })
   .catch(err => {
     domUpdates.showError(err)
