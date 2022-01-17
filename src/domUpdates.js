@@ -21,6 +21,10 @@ const capitalize = string => {
 }
 
 const domUpdates = {
+  // showLoginPage() {
+
+  // },
+
   loadCustomerInfo(hotel) {
     this.loadCustomerBookings(hotel);
     totalSpent.innerText = `Total Amount Spent: $${hotel

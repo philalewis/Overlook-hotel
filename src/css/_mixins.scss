@@ -12,3 +12,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin buttonStyles() {
+  border: none;
+  background: #CCCCCC;
+  padding: 5px;
+}

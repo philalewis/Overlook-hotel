@@ -12,13 +12,15 @@ const getData = () => {
   .then(data => {
     hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
     hotel.getCustomerInfo(currentUserId);
-    domUpdates.loadCustomerInfo(hotel);
+    // domUpdates.loadCustomerInfo(hotel);
   })
   .catch(err => {
     domUpdates.showError(err)
     console.log('<<<<<<< This is what went wrong >>>>>>>>', err);
   })
 };
+
+// const 
 
 // const getRandomIndex = array => Math.floor(Math.random() * array.length);
 

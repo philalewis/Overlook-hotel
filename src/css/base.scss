@@ -7,7 +7,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  // @include display-flex-column;
+  @include display-flex-column;
+  @include center;
 }
 
 header {
@@ -34,7 +35,7 @@ h3, p {
   margin: 5px;
 }
 
-h4 {
+h3 {
   font-size: 24px;
 }
 
@@ -43,6 +44,13 @@ h4 {
   @include center;
   height: 30vh;
   width: 30vw;
+  background: white;
+  border-radius: 10px;
+}
+
+.login-btn {
+  margin: 20px 0 0 0;
+  width: 40%;
 }
 
 .booking-options {
@@ -59,7 +67,7 @@ h4 {
 .bookings,
 .rooms {
   @include display-flex-column;
-  margin-top: calc(16vh + 20px);
+  margin-top: calc(60vh);
   align-items: center;
 }
 
@@ -127,6 +135,14 @@ h4 {
   max-height: calc(100vh - 210px);
   overflow-y: auto;
   bottom: 50px;
+}
+
+button {
+  @include buttonStyles();
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .hidden {
