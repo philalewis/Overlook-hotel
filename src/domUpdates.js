@@ -48,7 +48,7 @@ const domUpdates = {
   
   loadCustomerBookings(hotel) {
     this.sortBookingsByDate(hotel);
-    bookings.innerHTML = `<p>Upcoming Bookings</p>`;
+    bookings.innerHTML = `<p class="book-past">Upcoming Bookings</p>`;
     hotel.currentCustomer.futureBookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
@@ -140,13 +140,15 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal,
+    hide([
+      modal,
       confirmBookingBox,
       errorBox,
       noRooms,
       loginError,
       bookingSuccessful,
-      pastDateError]);
+      pastDateError
+    ]);
   },
 
   hideRoomTypeOption() {
@@ -179,6 +181,11 @@ const domUpdates = {
 
   showPastDateError() {
     show([modal, pastDateError]);
+  },
+
+  signOut() {
+    show([loginPage]);
+    hide([bookingOptions, rooms, bookings]);
   }
 }
 

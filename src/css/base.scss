@@ -23,6 +23,11 @@ header {
   @include center;
 }
 
+.logout {
+  position: fixed;
+  right: 1rem;
+}
+
 h1 {
   margin: 0;
 }
@@ -39,9 +44,9 @@ h3 {
   font-size: 24px;
 }
 
-// h4 {
-//   font-size: 2rem;
-// }
+.book-past {
+  font-size: 2rem;
+}
 
 .login-page {
   @include display-flex-column;

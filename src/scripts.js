@@ -31,6 +31,7 @@ const password = document.getElementById('password');
 const exitLoginErrorButton = document.getElementById('exitLoginErrorButton');
 const exitSuccessfulBooking = document.getElementById('exitSuccessfulBooking');
 const exitPastDateError = document.getElementById('exitPastDateError');
+const logout = document.getElementById('logout');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
@@ -46,6 +47,7 @@ loginBtn.addEventListener('click', submitLoginInfo);
 exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
 exitSuccessfulBooking.addEventListener('click', domUpdates.exitModal);
 exitPastDateError.addEventListener('click', domUpdates.exitModal);
+logout.addEventListener('click', logoutUser);
 
 //************* LOGIN ******************/
 function submitLoginInfo() {
@@ -147,4 +149,11 @@ function submitBooking() {
     .catch(err => {
       domUpdates.showError(err)
     });
+}
+
+function logoutUser() {
+  username.value = '';
+  password.value = '';
+  currentUserId = 0;
+  domUpdates.signOut();
 }
