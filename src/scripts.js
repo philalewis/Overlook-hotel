@@ -5,7 +5,7 @@ import domUpdates from './domUpdates';
 import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
-let currentUserId = 5;
+let currentUserId = 0;
 
 const getData = () => {
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
@@ -48,6 +48,9 @@ exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
 exitSuccessfulBooking.addEventListener('click', domUpdates.exitModal);
 exitPastDateError.addEventListener('click', domUpdates.exitModal);
 logout.addEventListener('click', logoutUser);
+password.addEventListener('keyup', (event) => {
+  return event.code === 'Enter' ? submitLoginInfo() : null;
+})
 
 //************* LOGIN ******************/
 function submitLoginInfo() {

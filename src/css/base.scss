@@ -39,11 +39,7 @@ h3, p {
   margin: 5px;
 }
 
-h3 {
-  font-size: 24px;
-}
-
-.book-past {
+h3, .book-past {
   font-size: 2rem;
 }
 
@@ -85,9 +81,6 @@ h3 {
   justify-content: flex-start;
   margin-top: 8rem;
   align-items: center;
-}
-
-.bookings {
   height: 100%;
   overflow-y: auto;
 }
@@ -118,7 +111,6 @@ h3 {
 }
 
 .right-side {
-  @include display-flex-column;
   justify-content: flex-end;
   align-items: flex-end;
 }
