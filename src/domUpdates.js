@@ -11,6 +11,8 @@ const errorBox = document.getElementById('errorBox');
 const noRooms = document.getElementById('noRooms');
 const selectDate = document.getElementById('selectDate');
 const loginError = document.getElementById('loginError');
+const bookingSuccessful = document.getElementById('bookingSuccessful');
+const pastDateError = document.getElementById('pastDateError');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -35,20 +37,57 @@ const domUpdates = {
     hotel.currentCustomer.bookings.sort((a, b) => {
       return new Date(a.date) - new Date(b.date)
     })
+    hotel.currentCustomer.bookings.forEach(booking => {
+      if (new Date(booking.date) <= new Date()) {
+        hotel.currentCustomer.pastBookings.push(booking)
+      } else {
+        hotel.currentCustomer.futureBookings.push(booking)
+      }
+    })
   },
   
   loadCustomerBookings(hotel) {
     this.sortBookingsByDate(hotel);
-    bookings.innerHTML = '';
-    hotel.currentCustomer.bookings.forEach(booking => {
+    bookings.innerHTML = `<p class="book-past">Upcoming Bookings</p>`;
+    hotel.currentCustomer.futureBookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
         <h4>${booking.date}</h4>
         <section class="booking-info">
           <section class="left-side">
-            <p class="room-number">Room Number: ${booking.roomNumber}</p>
-            <p class="room-type">Type: ${capitalize(booking.currentRoom.type)}</p>
-            <p class="bed-size">Bed: ${capitalize(booking.currentRoom.bedSize)}</p>
+            <p class="room-number">Room Number: ${booking
+              .roomNumber}</p>
+            <p class="room-type">Type: ${capitalize(booking
+              .currentRoom
+              .type)}</p>
+            <p class="bed-size">Bed: ${capitalize(booking.currentRoom
+              .bedSize)}</p>
+            <p class="num-beds">Number of Beds: ${booking
+              .currentRoom.numBeds}</p>
+          </section>
+          <section class="right-side">
+            <h4 class="cost"><b>$${booking
+              .currentRoom.cost.toFixed(2)}</b></h4>
+            <p class="confirmation-num">Confirmation Number: ${booking
+              .id}</p>
+          </section>
+        </section>
+      </section>`
+    })
+    bookings.innerHTML += `<p class="book-past">Past Bookings</p>`;
+    hotel.currentCustomer.futureBookings.forEach(booking => {
+      bookings.innerHTML += `
+      <section class="booking" id="">
+        <h4>${booking.date}</h4>
+        <section class="booking-info">
+          <section class="left-side">
+            <p class="room-number">Room Number: ${booking
+              .roomNumber}</p>
+            <p class="room-type">Type: ${capitalize(booking
+              .currentRoom
+              .type)}</p>
+            <p class="bed-size">Bed: ${capitalize(booking.currentRoom
+              .bedSize)}</p>
             <p class="num-beds">Number of Beds: ${booking
               .currentRoom.numBeds}</p>
           </section>
@@ -101,7 +140,15 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox, errorBox, noRooms, loginError]);
+    hide([
+      modal,
+      confirmBookingBox,
+      errorBox,
+      noRooms,
+      loginError,
+      bookingSuccessful,
+      pastDateError
+    ]);
   },
 
   hideRoomTypeOption() {
@@ -125,6 +172,20 @@ const domUpdates = {
 
   showLoginError() {
     show([modal, loginError]);
+  },
+
+  showSuccessfulBooking() {
+    show([modal, bookingSuccessful]);
+    hide([confirmBookingBox]);
+  },
+
+  showPastDateError() {
+    show([modal, pastDateError]);
+  },
+
+  signOut() {
+    show([loginPage]);
+    hide([bookingOptions, rooms, bookings]);
   }
 }
 

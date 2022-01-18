@@ -66,7 +66,7 @@ class Hotel {
   }
 
   getCustomerBookings(id) {
-    return this.bookings.filter(booking => booking.userId === id);
+    return this.bookings.filter(booking => booking.userID === id);
   }
 
   calculateCustomerExpenses(id) {

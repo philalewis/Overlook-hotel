@@ -29,6 +29,9 @@ const loginBtn = document.getElementById('loginBtn');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const exitLoginErrorButton = document.getElementById('exitLoginErrorButton');
+const exitSuccessfulBooking = document.getElementById('exitSuccessfulBooking');
+const exitPastDateError = document.getElementById('exitPastDateError');
+const logout = document.getElementById('logout');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
@@ -42,6 +45,9 @@ exitNoRoomsButton.addEventListener('click', () => {
 });
 loginBtn.addEventListener('click', submitLoginInfo);
 exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
+exitSuccessfulBooking.addEventListener('click', domUpdates.exitModal);
+exitPastDateError.addEventListener('click', domUpdates.exitModal);
+logout.addEventListener('click', logoutUser);
 
 //************* LOGIN ******************/
 function submitLoginInfo() {
@@ -84,10 +90,25 @@ function showLoginError() {
 
 //************** ROOMS AND BOOKINGS ****************/
 function loadRooms() {
-  hotel.updateSelectedDate(selectDate.value);
-  hotel.filterByDate(selectDate.value);
-  domUpdates.updateRooms(hotel.filteredRooms);
-  addEventListenersToSelectionButtons();
+  let today = getTodaysDate();
+  let selectedDate = selectDate.value.replaceAll('-', '/');
+  if (selectedDate >= today) {
+    hotel.updateSelectedDate(selectDate.value);
+    hotel.filterByDate(selectDate.value);
+    domUpdates.updateRooms(hotel.filteredRooms);
+    addEventListenersToSelectionButtons();
+  } else {
+    domUpdates.showPastDateError();
+  }
+}
+
+function getTodaysDate() {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  today = yyyy + '/' + mm + '/' + dd;
+  return today;
 }
 
 function filterRooms() {
@@ -122,10 +143,17 @@ function submitBooking() {
       hotel.getCustomerInfo(currentUserId);
       domUpdates.loadCustomerInfo(hotel);
       addEventListenersToSelectionButtons();
-      domUpdates.exitModal();
+      domUpdates.showSuccessfulBooking();
       domUpdates.hideRoomTypeOption();
     })
     .catch(err => {
       domUpdates.showError(err)
     });
+}
+
+function logoutUser() {
+  username.value = '';
+  password.value = '';
+  currentUserId = 0;
+  domUpdates.signOut();
 }

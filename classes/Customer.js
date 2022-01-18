@@ -6,6 +6,8 @@ class Customer extends User {
     super(user);
     this.bookings = bookings ? this.populateBookings(bookings) : [];
     this.type = 'customer';
+    this.futureBookings = [];
+    this.pastBookings = [];
   }
 
   populateBookings(bookings) {
@@ -13,7 +15,7 @@ class Customer extends User {
   }
 
   updateBookings(bookingsData, roomsData) {
-    const updatedBookings = bookingsData.filter(booking => booking.userId === this.id);
+    const updatedBookings = bookingsData.filter(booking => booking.userID === this.id);
     this.bookings = updatedBookings.map(booking => new Booking(booking, roomsData));
   }
 }
