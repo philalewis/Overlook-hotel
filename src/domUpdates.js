@@ -11,6 +11,7 @@ const errorBox = document.getElementById('errorBox');
 const noRooms = document.getElementById('noRooms');
 const selectDate = document.getElementById('selectDate');
 const loginError = document.getElementById('loginError');
+const bookingSuccessful = document.getElementById('bookingSuccessful');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -46,9 +47,13 @@ const domUpdates = {
         <h4>${booking.date}</h4>
         <section class="booking-info">
           <section class="left-side">
-            <p class="room-number">Room Number: ${booking.roomNumber}</p>
-            <p class="room-type">Type: ${capitalize(booking.currentRoom.type)}</p>
-            <p class="bed-size">Bed: ${capitalize(booking.currentRoom.bedSize)}</p>
+            <p class="room-number">Room Number: ${booking
+              .roomNumber}</p>
+            <p class="room-type">Type: ${capitalize(booking
+              .currentRoom
+              .type)}</p>
+            <p class="bed-size">Bed: ${capitalize(booking.currentRoom
+              .bedSize)}</p>
             <p class="num-beds">Number of Beds: ${booking
               .currentRoom.numBeds}</p>
           </section>
@@ -101,7 +106,12 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox, errorBox, noRooms, loginError]);
+    hide([modal,
+      confirmBookingBox,
+      errorBox,
+      noRooms,
+      loginError,
+      bookingSuccessful]);
   },
 
   hideRoomTypeOption() {
@@ -125,6 +135,11 @@ const domUpdates = {
 
   showLoginError() {
     show([modal, loginError]);
+  },
+
+  showSuccessfulBooking() {
+    show([modal, bookingSuccessful]);
+    hide([confirmBookingBox]);
   }
 }
 

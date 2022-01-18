@@ -13,7 +13,7 @@ class Customer extends User {
   }
 
   updateBookings(bookingsData, roomsData) {
-    const updatedBookings = bookingsData.filter(booking => booking.userId === this.id);
+    const updatedBookings = bookingsData.filter(booking => booking.userID === this.id);
     this.bookings = updatedBookings.map(booking => new Booking(booking, roomsData));
   }
 }

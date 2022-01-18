@@ -140,7 +140,8 @@ h3 {
 .error-box,
 .confirm-booking-box,
 .no-rooms,
-.login-error {
+.login-error,
+.booking-successful {
   @include display-flex-column();
   @include center;
   justify-content: center;

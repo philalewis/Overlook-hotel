@@ -29,6 +29,7 @@ const loginBtn = document.getElementById('loginBtn');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const exitLoginErrorButton = document.getElementById('exitLoginErrorButton');
+const exitSuccessfulBooking = document.getElementById('exitSuccessfulBooking');
 
 //************* Event Listeners ****************
 window.addEventListener('load', getData);
@@ -42,6 +43,7 @@ exitNoRoomsButton.addEventListener('click', () => {
 });
 loginBtn.addEventListener('click', submitLoginInfo);
 exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
+exitSuccessfulBooking.addEventListener('click', domUpdates.exitModal);
 
 //************* LOGIN ******************/
 function submitLoginInfo() {
@@ -122,7 +124,7 @@ function submitBooking() {
       hotel.getCustomerInfo(currentUserId);
       domUpdates.loadCustomerInfo(hotel);
       addEventListenersToSelectionButtons();
-      domUpdates.exitModal();
+      domUpdates.showSuccessfulBooking();
       domUpdates.hideRoomTypeOption();
     })
     .catch(err => {
