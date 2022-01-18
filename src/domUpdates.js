@@ -40,6 +40,7 @@ const domUpdates = {
   loadCustomerBookings(hotel) {
     this.sortBookingsByDate(hotel);
     bookings.innerHTML = '';
+    
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
@@ -64,7 +65,7 @@ const domUpdates = {
   },
 
   updateRooms(roomData) {
-    if(roomData.length === 0) {
+    if (roomData.length === 0) {
       this.showNoRoomMessage()
     } else {
       this.loadRooms(roomData);
@@ -119,7 +120,7 @@ const domUpdates = {
     show([modal, noRooms]);
   },
 
-  exitNoRooms(hotel) {
+  exitNoRooms() {
     hide([modal, noRooms]);
   },
 

@@ -48,10 +48,10 @@ exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
 //************* LOGIN ******************/
 function submitLoginInfo() {
   let id = '';
-  if(validateUsername()) {
+  if (validateUsername()) {
     id = getCustomerId();
     console.log(currentUserId)
-    if(validatePassword(id)) {
+    if (validatePassword(id)) {
       hotel.getCustomerInfo(id);
       domUpdates.loadCustomerInfo(hotel);
     } else {
@@ -120,7 +120,7 @@ function submitBooking() {
     roomNumber: parseInt(hotel.selectedRoom)
   }
   postBooking(postObj)
-  .then(data => {
+  .then(() => {
     getData();
     hotel.getCustomerInfo(currentUserId);
     domUpdates.loadCustomerInfo(hotel);
