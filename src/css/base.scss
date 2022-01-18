@@ -39,6 +39,10 @@ h3 {
   font-size: 24px;
 }
 
+// h4 {
+//   font-size: 2rem;
+// }
+
 .login-page {
   @include display-flex-column;
   @include center;
@@ -141,7 +145,8 @@ h3 {
 .confirm-booking-box,
 .no-rooms,
 .login-error,
-.booking-successful {
+.booking-successful,
+.past-date-error {
   @include display-flex-column();
   @include center;
   justify-content: center;

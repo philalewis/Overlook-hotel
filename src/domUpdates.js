@@ -12,6 +12,7 @@ const noRooms = document.getElementById('noRooms');
 const selectDate = document.getElementById('selectDate');
 const loginError = document.getElementById('loginError');
 const bookingSuccessful = document.getElementById('bookingSuccessful');
+const pastDateError = document.getElementById('pastDateError');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -73,7 +74,7 @@ const domUpdates = {
         </section>
       </section>`
     })
-    bookings.innerHTML += `<p>Past Bookings</p>`;
+    bookings.innerHTML += `<p class="book-past">Past Bookings</p>`;
     hotel.currentCustomer.futureBookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
@@ -144,7 +145,8 @@ const domUpdates = {
       errorBox,
       noRooms,
       loginError,
-      bookingSuccessful]);
+      bookingSuccessful,
+      pastDateError]);
   },
 
   hideRoomTypeOption() {
@@ -173,6 +175,10 @@ const domUpdates = {
   showSuccessfulBooking() {
     show([modal, bookingSuccessful]);
     hide([confirmBookingBox]);
+  },
+
+  showPastDateError() {
+    show([modal, pastDateError]);
   }
 }
 
