@@ -3,7 +3,7 @@ const retrieveData = api =>
     .then(response => response.json())
 
 const catchError = response => {
-  if(response.ok) {
+  if (response.ok) {
     return response.json();
   } else {
     throw new Error('Something went wrong. Please try again');
@@ -24,7 +24,7 @@ const postBooking = (obj) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => catchError(response));
+    .then(response => catchError(response));
 }
 
 export {getRoomsData, getCustomersData, getBookingsData, postBooking};

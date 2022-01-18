@@ -10,6 +10,7 @@ const errorMessage = document.getElementById('errorMessage');
 const errorBox = document.getElementById('errorBox');
 const noRooms = document.getElementById('noRooms');
 const selectDate = document.getElementById('selectDate');
+const loginError = document.getElementById('loginError');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -29,9 +30,17 @@ const domUpdates = {
     show([bookingOptions, bookings]);
     hide([loginPage, rooms]);
   },
+
+  sortBookingsByDate(hotel) {
+    hotel.currentCustomer.bookings.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date)
+    })
+  },
   
   loadCustomerBookings(hotel) {
+    this.sortBookingsByDate(hotel);
     bookings.innerHTML = '';
+
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
@@ -56,11 +65,14 @@ const domUpdates = {
   },
 
   updateRooms(roomData) {
-    roomData.length === 0 ?
-      this.showNoRoomMessage() :
+    if (roomData.length === 0) {
+      this.showNoRoomMessage()
+    } else {
       this.loadRooms(roomData);
-    show([rooms, selectRoomType]);
-    hide([bookings]);
+      show([rooms, selectRoomType]);
+      hide([bookings]);
+      selectRoomType.selectedIndex = 0;
+    }
   },
 
   loadRooms(roomData) {
@@ -90,7 +102,11 @@ const domUpdates = {
   },
 
   exitModal() {
-    hide([modal, confirmBookingBox, errorBox, noRooms]);
+    hide([modal, confirmBookingBox, errorBox, noRooms, loginError]);
+  },
+
+  hideRoomTypeOption() {
+    hide([selectRoomType]);
   },
 
   showError(error) {
@@ -104,9 +120,12 @@ const domUpdates = {
     show([modal, noRooms]);
   },
 
-  exitNoRooms(hotel) {
+  exitNoRooms() {
     hide([modal, noRooms]);
-    this.loadCustomerInfo(hotel);
+  },
+
+  showLoginError() {
+    show([modal, loginError]);
   }
 }
 

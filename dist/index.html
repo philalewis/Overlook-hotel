@@ -21,6 +21,7 @@
     <section class="room-type-select hidden" id='selectRoomType'>
       <label class="input-label">Room Type:
         <select name="room-type-input" class="" id="roomType">
+          <option value="select a room type">Select a Room Type</option>
           <option value="single room">Single Room</option>
           <option value="suite">Suite</option>
           <option value="junior suite">Junior Suite</option>
@@ -29,14 +30,17 @@
       </label>
     </section>
   </nav>
-  <section class="login-page hidden" id="loginPage">
-    <h2>Login</h2>
-    <label>Username:
-      <input type="text" class="login-input" id="username">
-    </label>
-    <label>Password:
-      <input type="text" class="login-input" id="password">
-    </label>
+  <section class="login-style-box">
+    <section class="login-page" id="loginPage">
+      <h2>Login</h2>
+      <label>Username:
+        <input type="text" class="login-input" id="username">
+      </label>
+      <label>Password:&nbsp
+        <input type="text" class="login-input" id="password">
+      </label>
+      <button class="login-btn" id="loginBtn">LOGIN</button>
+    </section>
   </section>
   <section id="dashboard">
     <section class="bookings hidden" id="bookings">
@@ -45,6 +49,11 @@
     </section>
   </section>
   <section class="modal hidden" id="modal">
+    <section class="login-error hidden" id="loginError">
+      <p>The username or password is incorrect. Please try agian.</p>
+      <button id="exitLoginErrorButton">OKAY</button>
+    </section>
+
     <section class="no-rooms hidden" id="noRooms">
       <p>We're sorry, there are no rooms available for the date you selected. We deeply apologize for the inconvenince.</p>
       <button id="exitNoRoomsButton">OKAY</button>
