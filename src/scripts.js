@@ -9,15 +9,13 @@ let currentUserId = 5;
 
 const getData = () => {
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
-  .then(data => {
-    hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
-    // hotel.getCustomerInfo(currentUserId);
-    // domUpdates.loadCustomerInfo(hotel);
-  })
-  .catch(err => {
-    domUpdates.showError(err)
-    console.log('<<<<<<< This is what went wrong >>>>>>>>', err);
-  })
+    .then(data => {
+      hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
+    })
+    .catch(err => {
+      domUpdates.showError(err)
+      console.log('<<<<<<< This is what went wrong >>>>>>>>', err);
+    })
 };
 
 //************* Query Selectors ****************
@@ -120,15 +118,15 @@ function submitBooking() {
     roomNumber: parseInt(hotel.selectedRoom)
   }
   postBooking(postObj)
-  .then(() => {
-    getData();
-    hotel.getCustomerInfo(currentUserId);
-    domUpdates.loadCustomerInfo(hotel);
-    addEventListenersToSelectionButtons();
-    domUpdates.exitModal();
-    domUpdates.hideRoomTypeOption();
-  })
-  .catch(err => {
-    domUpdates.showError(err)
-  });
+    .then(() => {
+      getData();
+      hotel.getCustomerInfo(currentUserId);
+      domUpdates.loadCustomerInfo(hotel);
+      addEventListenersToSelectionButtons();
+      domUpdates.exitModal();
+      domUpdates.hideRoomTypeOption();
+    })
+    .catch(err => {
+      domUpdates.showError(err)
+    });
 }

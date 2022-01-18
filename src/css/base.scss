@@ -53,6 +53,13 @@ h3 {
   width: 40%;
 }
 
+.login-style-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  @include center;
+}
+
 .booking-options {
   width: 100%;
   @include display-flex-row;
