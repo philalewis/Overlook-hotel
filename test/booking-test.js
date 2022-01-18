@@ -1,14 +1,18 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Booking from '../classes/Booking';
+import Room from '../classes/Room';
 import bookings from '../data/sample-bookings-data';
+import rooms from '../data/sample-bookings-data';
 
 describe('Booking class', () => {
 
   let booking;
+  let roomsData;
 
   beforeEach(() => {
-    booking = new Booking(bookings[0]);
+    roomsData = rooms.map(room => new Room(room));
+    booking = new Booking(bookings[0], roomsData);
   });
 
   it('should be a function', () => {

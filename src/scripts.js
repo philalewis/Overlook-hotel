@@ -48,7 +48,6 @@ function submitLoginInfo() {
   let id = '';
   if (validateUsername()) {
     id = getCustomerId();
-    console.log(currentUserId)
     if (validatePassword(id)) {
       hotel.getCustomerInfo(id);
       domUpdates.loadCustomerInfo(hotel);

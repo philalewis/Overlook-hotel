@@ -3,6 +3,7 @@ const expect = chai.expect;
 import Manager from '../classes/Manager';
 import users from '../data/sample-customers-data';
 import bookings from '../data/sample-bookings-data';
+import rooms from '../data/sample-rooms-data';
 
 describe('Manager class', () => {
 
@@ -10,7 +11,7 @@ describe('Manager class', () => {
   let anonymous;
 
   beforeEach(() => {
-    billEvans = new Manager(users[2], bookings);
+    billEvans = new Manager(users[2], bookings, rooms);
     anonymous = new Manager();
   });
 

@@ -62,7 +62,7 @@ class Hotel {
   }
 
   getCustomerInfo(id) {
-    this.currentCustomer = this.customers.find(customer => customer.id === id);
+    return this.currentCustomer = this.customers.find(customer => customer.id === id);
   }
 
   getCustomerBookings(id) {
