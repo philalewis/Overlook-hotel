@@ -6,6 +6,8 @@ class Customer extends User {
     super(user);
     this.bookings = bookings ? this.populateBookings(bookings) : [];
     this.type = 'customer';
+    this.futureBookings = [];
+    this.pastBookings = [];
   }
 
   populateBookings(bookings) {
