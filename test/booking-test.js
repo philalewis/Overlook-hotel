@@ -29,7 +29,7 @@ describe('Booking class', () => {
   });
 
   it('should have a userId', () => {
-    expect(booking.userId).to.equal(1);
+    expect(booking.userID).to.equal(1);
   });
 
   it('should have a date', () => {

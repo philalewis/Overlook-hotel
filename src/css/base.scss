@@ -8,7 +8,6 @@ body {
   padding: 0;
   height: 100vh;
   @include display-flex-column;
-  // @include center;
 }
 
 header {
@@ -51,8 +50,8 @@ h3 {
 .login-page {
   @include display-flex-column;
   @include center;
-  height: 30vh;
-  width: 30vw;
+  height: 20rem;
+  width: 24rem;
   background: white;
   border-radius: 10px;
 }
@@ -89,7 +88,6 @@ h3 {
 }
 
 .bookings {
-  // border: 1px solid red;
   height: 100%;
   overflow-y: auto;
 }
@@ -128,8 +126,6 @@ h3 {
 .select-room {
   width: 50%;
   border: none;
-  border-radius: 10px;
-  height: 4vh;
   background: $primary-background;
 }
 
@@ -159,14 +155,15 @@ h3 {
   margin: auto;
   padding: 20px;
   width: 40%;
-  max-height: calc(100vh - 210px);
+  max-height: 8rem;
   overflow-y: auto;
   bottom: 50px;
+  text-align: center;
 }
 
 button {
   @include buttonStyles();
-  width: 5vw;
+  width: 5rem;
   margin: 10px;
   border-radius: 5px;
 }
