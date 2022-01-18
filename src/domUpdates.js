@@ -152,7 +152,7 @@ const domUpdates = {
   },
 
   hideRoomTypeOption() {
-    hide([selectRoomType]);
+    hide([selectRoomType, rooms]);
   },
 
   showError(error) {
