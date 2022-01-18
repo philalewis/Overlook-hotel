@@ -9,7 +9,7 @@ class Customer extends User {
   }
 
   populateBookings(bookings) {
-    return bookings.filter(booking => booking.userId === this.id);
+    return bookings.filter(booking => booking.userID === this.id);
   }
 
   updateBookings(bookingsData, roomsData) {
