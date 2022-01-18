@@ -40,7 +40,6 @@ const domUpdates = {
   loadCustomerBookings(hotel) {
     this.sortBookingsByDate(hotel);
     bookings.innerHTML = '';
-
     hotel.currentCustomer.bookings.forEach(booking => {
       bookings.innerHTML += `
       <section class="booking" id="">
