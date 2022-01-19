@@ -185,7 +185,7 @@ const domUpdates = {
   },
 
   signOut() {
-    show([loginPage]);
+    show([loginPage, loginStyleBox]);
     hide([bookingOptions, rooms, bookings]);
   }
 }
