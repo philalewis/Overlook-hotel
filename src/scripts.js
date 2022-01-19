@@ -12,10 +12,6 @@ const getData = () => {
     .then(data => {
       hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
       hotel.getCustomerInfo(currentUserId);
-      // domUpdates.loadCustomerInfo(hotel);
-      // addEventListenersToSelectionButtons();
-      // domUpdates.showSuccessfulBooking();
-      // domUpdates.hideRoomTypeOption();
     })
     .catch(err => {
       domUpdates.showError(err)
@@ -154,9 +150,9 @@ function submitBooking() {
     .catch(err => {
       domUpdates.showError(err)
     });
-  }
+}
   
-  function exitSuccessfulBookingBox() {
+function exitSuccessfulBookingBox() {
   hotel.getCustomerInfo(currentUserId);
   domUpdates.loadCustomerInfo(hotel);
   addEventListenersToSelectionButtons();
