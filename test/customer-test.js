@@ -8,10 +8,8 @@ describe('Customer class', () => {
 
   let paulChambers;
   let anonymous;
-  let filteredBookings;
 
   beforeEach(() => {
-    filteredBookings = bookings.filter(booking => booking.userID === 2);
     paulChambers = new Customer(users[1], bookings);
     anonymous = new Customer();
   });

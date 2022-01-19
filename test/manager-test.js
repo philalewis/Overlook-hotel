@@ -8,11 +8,9 @@ import rooms from '../data/sample-rooms-data';
 describe('Manager class', () => {
 
   let billEvans;
-  let anonymous;
 
   beforeEach(() => {
     billEvans = new Manager(users[2], bookings, rooms);
-    anonymous = new Manager();
   });
 
   it('should be a function', () => {

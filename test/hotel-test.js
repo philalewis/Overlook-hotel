@@ -64,14 +64,14 @@ describe('Hotel class', () => {
     expect(hotel.bookings[5].id.length).to.equal(17);
   });
   
-    it('should be able to delete a booking', () => {
-      expect(hotel.bookings.length).to.equal(5);
-      
-      hotel.cancelBooking("5fwrgu4i7k55hl6t6");
+  it('should be able to delete a booking', () => {
+    expect(hotel.bookings.length).to.equal(5);
+    
+    hotel.cancelBooking("5fwrgu4i7k55hl6t6");
   
-      expect(hotel.bookings.length).to.equal(4);
-      expect(hotel.bookings[2].id).to.equal("5fwrgu4i7k55hl6t7");
-    });
+    expect(hotel.bookings.length).to.equal(4);
+    expect(hotel.bookings[2].id).to.equal("5fwrgu4i7k55hl6t7");
+  });
 
   it('should have a list of customers', () => {
     expect(hotel.customers).to.be.an('array');

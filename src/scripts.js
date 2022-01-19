@@ -5,12 +5,13 @@ import domUpdates from './domUpdates';
 import {getRoomsData, getCustomersData, getBookingsData, postBooking} from './apiCalls';
 
 let hotel;
-let currentUserId = 5;
+let currentUserId = 0;
 
 const getData = () => {
   Promise.all([getRoomsData(), getCustomersData(), getBookingsData()])
     .then(data => {
       hotel = new Hotel(data[0].rooms, data[1].customers, data[2].bookings);
+      hotel.getCustomerInfo(currentUserId);
     })
     .catch(err => {
       domUpdates.showError(err)
@@ -45,9 +46,12 @@ exitNoRoomsButton.addEventListener('click', () => {
 });
 loginBtn.addEventListener('click', submitLoginInfo);
 exitLoginErrorButton.addEventListener('click', domUpdates.exitModal);
-exitSuccessfulBooking.addEventListener('click', domUpdates.exitModal);
+exitSuccessfulBooking.addEventListener('click', exitSuccessfulBookingBox);
 exitPastDateError.addEventListener('click', domUpdates.exitModal);
 logout.addEventListener('click', logoutUser);
+password.addEventListener('keyup', (event) => {
+  return event.code === 'Enter' ? submitLoginInfo() : null;
+})
 
 //************* LOGIN ******************/
 function submitLoginInfo() {
@@ -139,16 +143,20 @@ function submitBooking() {
   }
   postBooking(postObj)
     .then(() => {
-      getData();
-      hotel.getCustomerInfo(currentUserId);
-      domUpdates.loadCustomerInfo(hotel);
-      addEventListenersToSelectionButtons();
+      getData()
       domUpdates.showSuccessfulBooking();
       domUpdates.hideRoomTypeOption();
     })
     .catch(err => {
       domUpdates.showError(err)
     });
+}
+  
+function exitSuccessfulBookingBox() {
+  hotel.getCustomerInfo(currentUserId);
+  domUpdates.loadCustomerInfo(hotel);
+  addEventListenersToSelectionButtons();
+  domUpdates.exitModal();
 }
 
 function logoutUser() {
