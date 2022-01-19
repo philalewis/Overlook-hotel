@@ -13,6 +13,7 @@ const selectDate = document.getElementById('selectDate');
 const loginError = document.getElementById('loginError');
 const bookingSuccessful = document.getElementById('bookingSuccessful');
 const pastDateError = document.getElementById('pastDateError');
+const loginStyleBox = document.querySelector('.login-style-box');
 
 const show = elements => elements.forEach(element => element.classList.remove('hidden'));
 const hide = elements => elements.forEach(element => element.classList.add('hidden'));
@@ -30,7 +31,7 @@ const domUpdates = {
       .calculateCustomerExpenses(hotel.currentCustomer.id)}`;
     selectDate.value = '';
     show([bookingOptions, bookings]);
-    hide([loginPage, rooms]);
+    hide([loginPage, rooms, loginStyleBox]);
   },
 
   sortBookingsByDate(hotel) {
@@ -147,7 +148,7 @@ const domUpdates = {
       noRooms,
       loginError,
       bookingSuccessful,
-      pastDateError
+      pastDateError,
     ]);
   },
 
